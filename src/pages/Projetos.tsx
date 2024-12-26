@@ -1,8 +1,7 @@
 import Header from "@/components/header";
 import InputIcon from "@/components/input-icon";
-import MyModal from "@/components/MyModal";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -10,10 +9,11 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectVa
 import { Skeleton } from "@/components/ui/skeleton";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { toast } from "@/hooks/use-toast";
-import { CheckCircle, Circle, Loader2, MoreHorizontal, PlusCircle, Search, Trash, XCircle } from "lucide-react";
+import { CheckCircle, Circle, MoreHorizontal, Search, Trash, XCircle } from "lucide-react";
 import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query" 
 import { getProjects, createProject, updateProject, deleteProject } from "@/data/projetos";
+import LayoutBase from "@/components/layout-base";
 
 
 export default function Projetos() {
@@ -124,65 +124,52 @@ export default function Projetos() {
       <Header />
       <div className="h-screen flex w-full">
         <Card className="w-full h-full pt-16">
-          <CardHeader className="flex flex-row justify-between items-center">
-            <div>
-                <CardTitle className="flex sm:gap-2">
-                  <span className="font-bold text-2xl">Projetos</span>
-                </CardTitle>
-                <CardDescription className="hidden sm:flex">Gerenciamento dos projectos da FullTech.</CardDescription>
-            </div>
-            <div>
-                <MyModal
-                  titulo_modal="Adicionar projeto"
-                  onClick={cadastrar}
-                  icone={isCreating && <Loader2 className="h-4 w-4 animate-spin"/>}
-                  triggers={
-                    <Button className="gap-1">
-                      <PlusCircle size={15} /> Adicionar
-                    </Button>
+          <LayoutBase
+            title="Projetos"
+            description="Gerenciamento dos projectos da FullTech."
+            isLoading={isCreating}
+            onConfirm={cadastrar}
+            visibleModal={true}
+          >
+            <div className="grid gap-4 py-4">
+              <div className="grid grid-cols-4 items-center gap-4">
+                <Label htmlFor="name" className="text-right">Nome</Label>
+                <Input value={nome} onChange={(text)=>setNome(text.target.value)} id="name"className="col-span-3" />
+              </div>
+              <div className="grid grid-cols-4 items-center gap-4">
+                <Label htmlFor="descricao" className="text-right">Descrição</Label>
+                <Input value={descricao} onChange={(text)=>setDescricao(text.target.value)} id="descricao" className="col-span-3" />
+              </div>
+              <div className="grid grid-cols-4 items-center gap-4">
+                <Label htmlFor="preco" className="text-right">Preço</Label>
+                <Input value={valor} onChange={(text)=>setValor(Number(text.target.value))} type="number" id="preco" className="col-span-3" />
+              </div>
+              <div className="grid grid-cols-4 items-center gap-4">
+                <Label htmlFor="tecnologias" className="text-right">Tecnologias</Label>
+                <Input value={tecnologias} onChange={(text)=>setTecnologias(text.target.value)} id="tecnologias" className="col-span-3" />
+              </div>
+              <div className="grid grid-cols-4 items-center gap-4">
+                <Label htmlFor="status" className="text-right">Estado</Label>
+                <Select value={status ? "true" : "false"} onValueChange={(value)=>{
+                  if(value === "true") {
+                    setStatus(true);
+                  }else{
+                    setStatus(false);
                   }
-                >
-                  <div className="grid gap-4 py-4">
-                    <div className="grid grid-cols-4 items-center gap-4">
-                      <Label htmlFor="name" className="text-right">Nome</Label>
-                      <Input value={nome} onChange={(text)=>setNome(text.target.value)} id="name"className="col-span-3" />
-                    </div>
-                    <div className="grid grid-cols-4 items-center gap-4">
-                      <Label htmlFor="descricao" className="text-right">Descrição</Label>
-                      <Input value={descricao} onChange={(text)=>setDescricao(text.target.value)} id="descricao" className="col-span-3" />
-                    </div>
-                    <div className="grid grid-cols-4 items-center gap-4">
-                      <Label htmlFor="preco" className="text-right">Preço</Label>
-                      <Input value={valor} onChange={(text)=>setValor(Number(text.target.value))} type="number" id="preco" className="col-span-3" />
-                    </div>
-                    <div className="grid grid-cols-4 items-center gap-4">
-                      <Label htmlFor="tecnologias" className="text-right">Tecnologias</Label>
-                      <Input value={tecnologias} onChange={(text)=>setTecnologias(text.target.value)} id="tecnologias" className="col-span-3" />
-                    </div>
-                    <div className="grid grid-cols-4 items-center gap-4">
-                      <Label htmlFor="status" className="text-right">Estado</Label>
-                      <Select value={status ? "true" : "false"} onValueChange={(value)=>{
-                        if(value === "true") {
-                          setStatus(true);
-                        }else{
-                          setStatus(false);
-                        }
-                      }}>
-                        <SelectTrigger id="status" className="col-span-3">
-                          <SelectValue placeholder="Selecione o estado" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectGroup>
-                            <SelectItem value="true">Concluido</SelectItem>
-                            <SelectItem value="false">Em andamento</SelectItem>
-                          </SelectGroup>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                  </div>
-                </MyModal>
+                }}>
+                  <SelectTrigger id="status" className="col-span-3">
+                    <SelectValue placeholder="Selecione o estado" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectItem value="true">Concluido</SelectItem>
+                      <SelectItem value="false">Em andamento</SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              </div>
             </div>
-          </CardHeader>
+          </LayoutBase>
           <div className="w-1/2 sm:w-1/4 lg:w-1/6 mx-5 mb-5">
             <InputIcon 
               value={search}
