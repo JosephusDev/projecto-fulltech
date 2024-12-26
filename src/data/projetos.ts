@@ -15,9 +15,7 @@ interface IData{
 
 export const getProjects = async (page: number, limit: number) => {
     const response = await Api.get<IData>(`/projetos/${page}/${limit}`)
-    const projetos = response.data.projetos;
-    const total = response.data.total;
-    return { projetos, total };
+    return response.data;
 }
 
 export const createProject = async (data: Omit<IProjeto, "id">) => {

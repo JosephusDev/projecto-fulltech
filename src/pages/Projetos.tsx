@@ -9,12 +9,12 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectVa
 import { Skeleton } from "@/components/ui/skeleton";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { toast } from "@/hooks/use-toast";
-import { CheckCircle, Circle, MoreHorizontal, Search, Trash, XCircle } from "lucide-react";
+import { CheckCircle, ChevronLeft, ChevronRight, Circle, MoreHorizontal, Search, Trash, XCircle } from "lucide-react";
 import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query" 
 import { getProjects, createProject, updateProject, deleteProject } from "@/data/projetos";
 import LayoutBase from "@/components/layout-base";
-import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
+import { Pagination, PaginationContent, PaginationItem, PaginationLink } from "@/components/ui/pagination";
 
 
 export default function Projetos() {
@@ -256,10 +256,13 @@ export default function Projetos() {
             <Pagination className="my-4">
               <PaginationContent>
                 <PaginationItem>
-                  <PaginationPrevious
-                    href="#"
+                  <Button 
+                    size={"icon"} 
+                    variant={"outline"}
                     onClick={() => handlePageChange(Math.max(currentPage - 1, 1))}
-                  />
+                  >
+                    <ChevronLeft size={20} />
+                  </Button>
                 </PaginationItem>
                 {Array.from({ length: totalPages }, (_, i) => (
                   <PaginationItem key={i}>
@@ -273,10 +276,13 @@ export default function Projetos() {
                   </PaginationItem>
                 ))}
                 <PaginationItem>
-                  <PaginationNext
-                    href="#"
+                  <Button 
+                    size={"icon"} 
+                    variant={"outline"}
                     onClick={() => handlePageChange(Math.min(currentPage + 1, totalPages))}
-                  />
+                  >
+                    <ChevronRight size={20} />
+                  </Button>
                 </PaginationItem>
               </PaginationContent>
             </Pagination>
