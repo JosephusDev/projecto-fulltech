@@ -14,6 +14,7 @@ import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query" 
 import { getProjects, createProject, updateProject, deleteProject } from "@/data/projetos";
 import LayoutBase from "@/components/layout-base";
+import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
 
 
 export default function Projetos() {
@@ -26,6 +27,8 @@ export default function Projetos() {
   const [tecnologias, setTecnologias] = useState("");
   const [status, setStatus] = useState(true);
   const [search, setSearch] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5
 
 
   const alerta = (text: string, type: 'sucesso' | 'erro') => {
@@ -45,11 +48,19 @@ export default function Projetos() {
     })
   }
 
-  const {data: projetos, isLoading} = useQuery({
+  const {data, isLoading} = useQuery({
     queryKey: ['projetos'],
-    queryFn: getProjects,
+    queryFn: () => getProjects(currentPage, itemsPerPage),
     staleTime: 1000 * 60 // 1 minuto até atualizar os dados
   })
+
+  const projetos = data?.projetos
+  const totalItems = data?.total || 0
+  const totalPages = Math.ceil(totalItems / itemsPerPage)
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page)
+  }
 
   const { mutateAsync: createProjectFn, isPending: isCreating } = useMutation({
     mutationFn: createProject,
@@ -242,6 +253,33 @@ export default function Projetos() {
                 }
               </TableBody>
             </Table>
+            <Pagination className="my-4">
+              <PaginationContent>
+                <PaginationItem>
+                  <PaginationPrevious
+                    href="#"
+                    onClick={() => handlePageChange(Math.max(currentPage - 1, 1))}
+                  />
+                </PaginationItem>
+                {Array.from({ length: totalPages }, (_, i) => (
+                  <PaginationItem key={i}>
+                    <PaginationLink
+                      href="#"
+                      onClick={() => handlePageChange(i + 1)}
+                      isActive={currentPage === i + 1}
+                    >
+                      {i + 1}
+                    </PaginationLink>
+                  </PaginationItem>
+                ))}
+                <PaginationItem>
+                  <PaginationNext
+                    href="#"
+                    onClick={() => handlePageChange(Math.min(currentPage + 1, totalPages))}
+                  />
+                </PaginationItem>
+              </PaginationContent>
+            </Pagination>
           </CardContent>
         </Card>
       </div>

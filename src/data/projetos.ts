@@ -8,10 +8,16 @@ interface IProjeto{
     tecnologias: string;
     status: boolean;
 }
+interface IData{
+    projetos: IProjeto[];
+    total: number;
+}
 
-export const getProjects = async () => {
-    const response = await Api.get<IProjeto[]>('/projetos');
-    return response.data;
+export const getProjects = async (page: number, limit: number) => {
+    const response = await Api.get<IData>(`/projetos/${page}/${limit}`)
+    const projetos = response.data.projetos;
+    const total = response.data.total;
+    return { projetos, total };
 }
 
 export const createProject = async (data: Omit<IProjeto, "id">) => {
