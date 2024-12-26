@@ -47,7 +47,8 @@ export default function Projetos() {
 
   const {data: projetos, isLoading} = useQuery({
     queryKey: ['projetos'],
-    queryFn: getProjects
+    queryFn: getProjects,
+    staleTime: 1000 * 60 // 1 minuto até atualizar os dados
   })
 
   const { mutateAsync: createProjectFn, isPending: isCreating } = useMutation({
