@@ -192,8 +192,8 @@ export default function Projetos() {
               }
             />
           </div>
-          <CardContent className="border rounded-lg p-1 mx-5">
-            <Table className="overflow-y-auto max-h-[400px]">
+          <CardContent className="border rounded-lg p-1 mx-5 overflow-y-auto max-h-[365px]">
+            <Table>
               <TableHeader>
                 <TableRow>
                   <TableHead className="font-bold text-center">Nº</TableHead>
@@ -254,18 +254,18 @@ export default function Projetos() {
                 }
               </TableBody>
             </Table>
-            {
-              !isLoading && projetosFiltrados && projetosFiltrados?.length > 0 && (
-                <MyPagination
-                  currentPage={currentPage}
-                  totalPages={totalPages}
-                  itemsPerPage={itemsPerPage}
-                  setItemsPerPage={setItemsPerPage}
-                  handlePageChange={handlePageChange}
-                />
-              )
-            }
           </CardContent>
+          {
+            !isLoading && projetosFiltrados && projetosFiltrados?.length > 0 && (
+              <MyPagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                itemsPerPage={itemsPerPage}
+                setItemsPerPage={setItemsPerPage}
+                handlePageChange={handlePageChange}
+              />
+            )
+          }
         </Card>
       </div>
     </>
