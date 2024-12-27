@@ -255,7 +255,7 @@ export default function Projetos() {
               </TableBody>
             </Table>
             {
-              !isLoading && (
+              !isLoading && projetosFiltrados && projetosFiltrados?.length > 0 && (
                 <MyPagination
                   currentPage={currentPage}
                   totalPages={totalPages}
