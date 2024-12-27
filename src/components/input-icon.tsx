@@ -18,7 +18,7 @@ export default function InputIcon({
         </div>
       )}
       <Input
-        className={`mt-3 text-center ${className}`}
+        className={`mt-3 text-center bg-secondary ${className}`}
         {...props} // Passa todas as props para o input
       />
     </div>

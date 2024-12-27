@@ -9,12 +9,12 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectVa
 import { Skeleton } from "@/components/ui/skeleton";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { toast } from "@/hooks/use-toast";
-import { CheckCircle, ChevronLeft, ChevronRight, Circle, MoreHorizontal, Search, Trash, XCircle } from "lucide-react";
+import { CheckCircle, Circle, MoreHorizontal, Search, Trash, XCircle } from "lucide-react";
 import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query" 
 import { getProjects, createProject, updateProject, deleteProject } from "@/data/projetos";
 import LayoutBase from "@/components/layout-base";
-import { Pagination, PaginationContent, PaginationItem, PaginationLink } from "@/components/ui/pagination";
+import MyPagination from "@/components/my-pagination";
 
 
 export default function Projetos() {
@@ -28,7 +28,7 @@ export default function Projetos() {
   const [status, setStatus] = useState(true);
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5
+  const [itemsPerPage, setItemsPerPage] = useState(5);
 
 
   const alerta = (text: string, type: 'sucesso' | 'erro') => {
@@ -49,7 +49,7 @@ export default function Projetos() {
   }
 
   const {data, isLoading} = useQuery({
-    queryKey: ['projetos'],
+    queryKey: ['projetos', currentPage, itemsPerPage],
     queryFn: () => getProjects(currentPage, itemsPerPage),
     staleTime: 1000 * 60 // 1 minuto até atualizar os dados
   })
@@ -183,6 +183,7 @@ export default function Projetos() {
           </LayoutBase>
           <div className="w-1/2 sm:w-1/4 lg:w-1/6 mx-5 mb-5">
             <InputIcon 
+              className="rounded-2xl"
               value={search}
               onChange={(text)=>setSearch(text.target.value)}
               placeholder="Pesquisar..." 
@@ -191,8 +192,8 @@ export default function Projetos() {
               }
             />
           </div>
-          <CardContent className="border rounded-lg p-1 mx-5 overflow-y-auto max-h-[400px]">
-            <Table>
+          <CardContent className="border rounded-lg p-1 mx-5">
+            <Table className="overflow-y-auto max-h-[400px]">
               <TableHeader>
                 <TableRow>
                   <TableHead className="font-bold text-center">Nº</TableHead>
@@ -253,39 +254,17 @@ export default function Projetos() {
                 }
               </TableBody>
             </Table>
-            <Pagination className="my-4">
-              <PaginationContent>
-                <PaginationItem>
-                  <Button 
-                    size={"icon"} 
-                    variant={"outline"}
-                    onClick={() => handlePageChange(Math.max(currentPage - 1, 1))}
-                  >
-                    <ChevronLeft size={20} />
-                  </Button>
-                </PaginationItem>
-                {Array.from({ length: totalPages }, (_, i) => (
-                  <PaginationItem key={i}>
-                    <PaginationLink
-                      href="#"
-                      onClick={() => handlePageChange(i + 1)}
-                      isActive={currentPage === i + 1}
-                    >
-                      {i + 1}
-                    </PaginationLink>
-                  </PaginationItem>
-                ))}
-                <PaginationItem>
-                  <Button 
-                    size={"icon"} 
-                    variant={"outline"}
-                    onClick={() => handlePageChange(Math.min(currentPage + 1, totalPages))}
-                  >
-                    <ChevronRight size={20} />
-                  </Button>
-                </PaginationItem>
-              </PaginationContent>
-            </Pagination>
+            {
+              !isLoading && (
+                <MyPagination
+                  currentPage={currentPage}
+                  totalPages={totalPages}
+                  itemsPerPage={itemsPerPage}
+                  setItemsPerPage={setItemsPerPage}
+                  handlePageChange={handlePageChange}
+                />
+              )
+            }
           </CardContent>
         </Card>
       </div>
