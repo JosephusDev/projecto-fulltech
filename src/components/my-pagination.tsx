@@ -16,7 +16,7 @@ export default function MyPagination(
     { currentPage, totalPages, itemsPerPage, setItemsPerPage, handlePageChange }: IPaginationProps
 ) {
     return(
-        <Pagination className="my-5 gap-x-5 items-center">
+        <Pagination className="flex flex-col sm:flex-row my-5 gap-x-5 gap-y-3 items-center">
             <div className="flex items-center gap-x-2">
                 <Label>Itens</Label>
                 <Select
@@ -27,13 +27,13 @@ export default function MyPagination(
                         <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
-                        <SelectItem value="3">3</SelectItem>
-                        <SelectItem value="4">4</SelectItem>
                         <SelectItem value="5">5</SelectItem>
+                        <SelectItem value="10">10</SelectItem>
+                        <SelectItem value="20">20</SelectItem>
+                        <SelectItem value="50">50</SelectItem>
                     </SelectContent>
                 </Select>
             </div>
-            <Label>Página {currentPage} de {totalPages}</Label>
             <PaginationContent>
                 <PaginationItem>
                         <Button 

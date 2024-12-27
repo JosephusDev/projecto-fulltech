@@ -134,7 +134,7 @@ export default function Projetos() {
     <>
       <Header />
       <div className="h-screen flex w-full">
-        <Card className="w-full h-full pt-16">
+        <Card className="w-full h-full pt-16 border-0">
           <LayoutBase
             title="Projetos"
             description="Gerenciamento dos projectos da FullTech."
