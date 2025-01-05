@@ -2,6 +2,8 @@ import { createContext, useContext, useState, ReactNode } from 'react';
 import axios from 'axios';
 import { useGoogleLogin, googleLogout } from '@react-oauth/google';
 import { useNavigate } from 'react-router-dom';
+import { useToast } from '@/hooks/use-toast';
+import { XCircle } from 'lucide-react';
 
 // Tipos TypeScript
 type User = {
@@ -29,9 +31,15 @@ export const useAuth = () => {
   return context;
 };
 
+const emails = [
+  "condepinto2@gmail.com",
+  "filomenoolivetree@gmail.com",
+]
+
 // Provedor do contexto
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
+  const {toast} = useToast()
 
   const navigate = useNavigate()
 
@@ -47,16 +55,30 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
             },
           }
         );
-        console.log('Informações do usuário:', userInfo.data);
         // Extrair dados do usuário
         const { given_name, family_name, email, picture } = userInfo.data;
-        setUser({
-          firstName: given_name,
-          lastName: family_name,
-          email: email,
-          picture: picture,
-        });
-        navigate('/projetos')
+        if(emails.some(e => e === email)){
+          localStorage.setItem('token', tokenResponse.access_token)
+          setUser({
+            firstName: given_name,
+            lastName: family_name,
+            email: email,
+            picture: picture,
+          });
+          navigate('/projetos')
+        }
+        else{
+          toast({
+            description: (
+              <div className='flex motion-preset-pop'>
+                <XCircle size='20' />
+                <div className='ml-2 font-bold'>Email não autorizado.</div>
+              </div>
+            ),
+            variant: 'destructive'
+          })
+          navigate('/')
+        }
       } catch (error) {
         console.error('Erro ao obter informações do usuário:', error);
       }
@@ -69,6 +91,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const logout = () => {
     setUser(null);
     googleLogout();
+    localStorage.removeItem('token')
     navigate('/')
   };
 
