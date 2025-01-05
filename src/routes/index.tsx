@@ -7,17 +7,19 @@ import Projetos from '@/pages/Projetos'
 import Clientes from '@/pages/Clientes'
 import Dashboard from '@/pages/Dashboard'
 import Login from '@/pages/Login'
+import { useAuth } from '@/context/AuthContext'
 
 export default function RoutesComponent() {
-  const token = localStorage.getItem('token')
+  const { user } = useAuth()
   return (
     <Routes>
+      {/* Rotas privadas */}
+      <Route path='/projetos' element={user ? <Projetos /> : <Navigate to='/' />} />
+      <Route path='/clientes' element={user ? <Clientes /> : <Navigate to='/' />} />
+      <Route path='/dashboard' element={user ? <Dashboard /> : <Navigate to='/' />} />
+
       {/* Rotas públicas */}
       <Route path='/' element={<Login />} />
-      {/* Rotas privadas */}
-      <Route path='/projetos' element={token ? <Projetos /> : <Navigate to='/' />} />
-      <Route path='/clientes' element={token ? <Clientes /> : <Navigate to='/' />} />
-      <Route path='/dashboard' element={token ? <Dashboard /> : <Navigate to='/' />} />
 
       {/* Rota para lidar com páginas não encontradas */}
       <Route path='*' element={<Navigate to='/' />} />
