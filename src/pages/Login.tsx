@@ -20,9 +20,9 @@ export default function Login() {
       {/* Coluna do Formulário */}
       <div className="flex items-center justify-center p-6 md:p-10">
         <div className="w-full max-w-sm">
-          <Card>
+          <Card className="animate-fade-in">
             <CardHeader>
-              <CardTitle className="text-2xl">FullTech</CardTitle>
+              <CardTitle className="text-2xl flex items-center gap-2 text-primary">FullTech Project</CardTitle>
               <CardDescription>
                 Gestão dos projectos da Startup Fulltech. Faça Login para continuar.
               </CardDescription>
@@ -37,7 +37,7 @@ export default function Login() {
                     placeholder="email@exemplo.com"
                   />
                 </div>
-                <Button type="submit" className="w-full">
+                <Button type="submit" className="w-full motion-preset-expand">
                   Login
                 </Button>
                 <Button onClick={() => login()} variant="outline" className="w-full">
@@ -51,7 +51,7 @@ export default function Login() {
 
       {/* Coluna da Animação Lottie */}
       <div className="hidden bg-muted lg:flex items-center justify-center">
-        <Lottie animationData={image} className="w-2/3" />
+        <Lottie animationData={image} className="w-2/3 animate-fade-in" />
       </div>
     </div>
   );

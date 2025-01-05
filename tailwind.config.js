@@ -50,7 +50,23 @@ export default {
           4: 'hsl(var(--chart-4))',
           5: 'hsl(var(--chart-5))',
         }
+      },
+      keyframes: {
+        'fade-in': {
+          '0%': { 
+            opacity: '0',
+            transform: 'translateY(100px)'
+          },
+          '100%': { 
+            opacity: '1',
+            transform: 'translateY(0)' 
+          },
+        }
+      },
+      animation: {
+        'fade-in': 'fade-in 1s ease-out forwards',
       }
     }
-  }
+  },
+  plugins: [require('tailwindcss-motion')],
 }
