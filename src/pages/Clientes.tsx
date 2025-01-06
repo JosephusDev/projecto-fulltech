@@ -140,13 +140,13 @@ export default function Clientes() {
 						visibleModal={true}
 					>
 						<div className='grid gap-4 py-4'>
-							<div className='grid grid-cols-4 items-center gap-2'>
+							<div className='grid sm:grid-cols-4 items-center gap-2'>
 								<Label htmlFor='name' className='text-right'>
 									Nome
 								</Label>
 								<Input onChange={text => setNome(text.target.value)} id='nome' className='col-span-3' />
 							</div>
-							<div className='grid grid-cols-4 items-center gap-x-4'>
+							<div className='grid sm:grid-cols-4 items-center gap-x-4'>
 								<Label htmlFor='descricao' className='text-right'>
 									Telefone
 								</Label>
@@ -172,7 +172,7 @@ export default function Clientes() {
 							/>
 						</div>
 					</LayoutBase>
-					<div className='w-1/6 mx-5 my-5'>
+					<div className='sm:w-2/5 md:w-1/6 lg:w-1/5 mx-5 my-5'>
 						<InputIcon
 							icon={<Search size={15} />}
 							onChange={e => setSearch(e.target.value)}
@@ -263,7 +263,7 @@ export default function Clientes() {
 														}
 													>
 														<div className='grid gap-4 py-4'>
-															<div className='grid grid-cols-4 items-center gap-2'>
+															<div className='grid sm:grid-cols-4 items-center gap-2'>
 																<Label htmlFor='nome' className='text-right'>
 																	Nome
 																</Label>
@@ -274,7 +274,7 @@ export default function Clientes() {
 																	className='col-span-3'
 																/>
 															</div>
-															<div className='grid grid-cols-4 items-center gap-4'>
+															<div className='grid sm:grid-cols-4 items-center gap-4'>
 																<Label htmlFor='telefone' className='text-right'>
 																	Telefone
 																</Label>
