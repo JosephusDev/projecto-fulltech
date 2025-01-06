@@ -11,7 +11,7 @@ export default function RoutesComponent() {
 		<Routes>
 			{/* Rotas privadas */}
 			<Route path='/projetos' element={user ? <Projetos /> : <Navigate to='/' />} />
-			<Route path='/clientes' element={<Clientes />} />
+			<Route path='/clientes' element={user ? <Clientes /> : <Navigate to='/' />} />
 			<Route path='/dashboard' element={user ? <Dashboard /> : <Navigate to='/' />} />
 
 			{/* Rotas públicas */}

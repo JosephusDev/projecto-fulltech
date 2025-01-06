@@ -140,14 +140,14 @@ export default function Clientes() {
 						visibleModal={true}
 					>
 						<div className='grid gap-4 py-4'>
-							<div className='grid sm:grid-cols-4 items-center gap-2'>
-								<Label htmlFor='name' className='text-right'>
+							<div className='grid sm:grid-cols-4 items-center gap-x-2'>
+								<Label htmlFor='nome' className='text-right m-2'>
 									Nome
 								</Label>
 								<Input onChange={text => setNome(text.target.value)} id='nome' className='col-span-3' />
 							</div>
-							<div className='grid sm:grid-cols-4 items-center gap-x-4'>
-								<Label htmlFor='descricao' className='text-right'>
+							<div className='grid sm:grid-cols-4 items-center gap-x-7'>
+								<Label htmlFor='telefone' className='text-right m-2'>
 									Telefone
 								</Label>
 								<Input
@@ -263,8 +263,8 @@ export default function Clientes() {
 														}
 													>
 														<div className='grid gap-4 py-4'>
-															<div className='grid sm:grid-cols-4 items-center gap-2'>
-																<Label htmlFor='nome' className='text-right'>
+															<div className='grid sm:grid-cols-4 items-center gap-x-2'>
+																<Label htmlFor='nome' className='text-right m-2'>
 																	Nome
 																</Label>
 																<Input
@@ -274,8 +274,8 @@ export default function Clientes() {
 																	className='col-span-3'
 																/>
 															</div>
-															<div className='grid sm:grid-cols-4 items-center gap-4'>
-																<Label htmlFor='telefone' className='text-right'>
+															<div className='grid sm:grid-cols-4 items-center gap-x-7'>
+																<Label htmlFor='telefone' className='text-right m-2'>
 																	Telefone
 																</Label>
 																<Input
