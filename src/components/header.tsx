@@ -1,5 +1,5 @@
 import { MainNav } from '@/components/main-nav'
-import { LeftNav } from '@/components/left-nav'
+import { RightNav } from '@/components/right-nav'
 import { MainNavMobile } from '@/components/main-nav-mobile'
 
 export default function Header() {
@@ -12,7 +12,7 @@ export default function Header() {
         <div className='flex md:hidden w-full'>
           <MainNavMobile />
         </div>
-        <LeftNav />
+        <RightNav />
       </div>
     </header>
   )
