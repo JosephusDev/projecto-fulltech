@@ -39,7 +39,7 @@ export default function LayoutBase({
 					disabled={isLoading}
 					icone={isLoading && <Loader2 className='h-4 w-4 animate-spin' />}
 					triggers={
-						<Button className='gap-1'>
+						<Button id='openModal' className='gap-1'>
 							<PlusCircle size={15} /> {buttonTitle}
 						</Button>
 					}

@@ -12,7 +12,7 @@ export function RightNav() {
 			<nav className='flex items-center space-x-3'>
 				<MyAvatar />
 				<ThemeToggle />
-				<Button onClick={() => logout()} variant={'ghost'} size={'icon'}>
+				<Button id='logoutButton' onClick={() => logout()} variant={'ghost'} size={'icon'}>
 					<LogOut size={20} />
 				</Button>
 			</nav>

@@ -32,7 +32,7 @@ export default function Projetos() {
 	const [currentPage, setCurrentPage] = useState(1)
 	const [itemsPerPage, setItemsPerPage] = useState(5)
 
-	const alerta = (text: string, type: 'sucesso' | 'erro', variant: 'default' | 'destructive' = 'default') => {
+	const alerta = (text: string, type: 'sucesso' | 'erro', variant: 'default' | 'destructive' = 'destructive') => {
 		let Icone
 		if (type === 'sucesso') {
 			Icone = CheckCircle
@@ -41,7 +41,7 @@ export default function Projetos() {
 		}
 		toast({
 			description: (
-				<div className='flex'>
+				<div className='flex motion-preset-pop'>
 					<Icone size='20' />
 					<div className='ml-2 font-bold'>{text}</div>
 				</div>
@@ -143,10 +143,10 @@ export default function Projetos() {
 					>
 						<div className='grid gap-4 py-4'>
 							<div className='grid grid-cols-4 items-center gap-4'>
-								<Label htmlFor='name' className='text-right'>
+								<Label htmlFor='nome' className='text-right'>
 									Nome
 								</Label>
-								<Input value={nome} onChange={text => setNome(text.target.value)} id='name' className='col-span-3' />
+								<Input value={nome} onChange={text => setNome(text.target.value)} id='nome' className='col-span-3' />
 							</div>
 							<div className='grid grid-cols-4 items-center gap-4'>
 								<Label htmlFor='descricao' className='text-right'>
@@ -274,7 +274,7 @@ export default function Projetos() {
 												<TableCell>
 													<DropdownMenu>
 														<DropdownMenuTrigger asChild>
-															<Button aria-haspopup='true' size='icon' variant='ghost'>
+															<Button id={`moreButton${index}`} aria-haspopup='true' size='icon' variant='ghost'>
 																<MoreHorizontal className='h-4 w-4' />
 																<span className='sr-only'>Toggle menu</span>
 															</Button>
@@ -295,7 +295,11 @@ export default function Projetos() {
 																	</>
 																)}
 															</DropdownMenuItem>
-															<DropdownMenuItem onClick={() => eliminar(projeto.id)} className='gap-2'>
+															<DropdownMenuItem
+																id={`trashButton${index}`}
+																onClick={() => eliminar(projeto.id)}
+																className='gap-2'
+															>
 																<Trash size={15} /> Eliminar
 															</DropdownMenuItem>
 														</DropdownMenuContent>

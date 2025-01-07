@@ -24,7 +24,7 @@ export default function Clientes() {
 	const [projeto, setProjeto] = useState('')
 	const [search, setSearch] = useState('')
 
-	const alerta = (text: string, type: 'sucesso' | 'erro', variant: 'default' | 'destructive' = 'default') => {
+	const alerta = (text: string, type: 'sucesso' | 'erro', variant: 'default' | 'destructive' = 'destructive') => {
 		let Icone
 		if (type === 'sucesso') {
 			Icone = CheckCircle
@@ -33,7 +33,7 @@ export default function Clientes() {
 		}
 		toast({
 			description: (
-				<div className='flex'>
+				<div className='flex motion-preset-pop'>
 					<Icone size='20' />
 					<div className='ml-2 font-bold'>{text}</div>
 				</div>

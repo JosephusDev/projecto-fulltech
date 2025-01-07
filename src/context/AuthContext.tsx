@@ -17,6 +17,7 @@ type User = {
 type AuthContextType = {
 	user: User | null
 	login: () => void
+	loginWithEmail: (email: string) => void
 	logout: () => void
 }
 
@@ -83,6 +84,28 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 		}
 	}, [navigate])
 
+	const loginWithEmail = (email: string) => {
+		if (emails.includes(email)) {
+			setUser({
+				firstName: 'José',
+				lastName: 'Pinto',
+				email,
+				picture: '',
+			})
+			navigate('/projetos')
+		} else {
+			toast({
+				description: (
+					<div className='flex motion-preset-pop'>
+						<XCircle size='20' />
+						<div className='ml-2 font-bold'>Email não autorizado.</div>
+					</div>
+				),
+				variant: 'destructive',
+			})
+		}
+	}
+
 	const login = useGoogleLogin({
 		onSuccess: async tokenResponse => {
 			// Obter informações do perfil do usuário
@@ -135,5 +158,5 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
 	if (isLoading) return <Loading />
 
-	return <AuthContext.Provider value={{ user, login, logout }}>{children}</AuthContext.Provider>
+	return <AuthContext.Provider value={{ user, login, logout, loginWithEmail }}>{children}</AuthContext.Provider>
 }

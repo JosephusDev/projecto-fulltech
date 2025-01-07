@@ -5,7 +5,7 @@ import { GoogleOAuthProvider } from '@react-oauth/google'
 import { AuthProvider } from './context/AuthContext'
 
 function App() {
-	const CLIENTE_ID = import.meta.env.VITE_CLIENTE_ID
+	const CLIENTE_ID = '793580490004-f54n8d3bpio1q8tu29pps5h5p7t98qks.apps.googleusercontent.com'
 
 	const queryCliente = new QueryClient()
 
