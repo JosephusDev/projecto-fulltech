@@ -1,4 +1,4 @@
-import Header from '@/components/header'
+import Header from '@/components/Header'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
@@ -11,10 +11,10 @@ import { useState } from 'react'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { getClients, createClient, updateClient, deleteClient } from '@/data/clientes'
 import { getProjects } from '@/data/projetos'
-import LayoutBase from '@/components/layout-base'
-import { ComboBox } from '@/components/combo-box'
-import MyModal from '@/components/my-modal'
-import InputIcon from '@/components/input-icon'
+import LayoutBase from '@/components/LayoutBase'
+import { ComboBox } from '@/components/ComboBox'
+import MyModal from '@/components/MyModal'
+import InputIcon from '@/components/InputIcon'
 
 export default function Clientes() {
 	const queryClient = useQueryClient()
