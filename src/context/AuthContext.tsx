@@ -4,7 +4,7 @@ import { useGoogleLogin, googleLogout } from '@react-oauth/google'
 import { useNavigate } from 'react-router-dom'
 import { useToast } from '@/hooks/use-toast'
 import { XCircle } from 'lucide-react'
-import Loading from '@/components/MyLoading'
+import Loading from '@/components/MyLoading.js'
 
 // Tipos TypeScript
 type User = {
