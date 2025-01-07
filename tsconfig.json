@@ -8,7 +8,7 @@
 			"@/*": ["./src/*"]
 		}
 	},
-	"include": ["cypress", "src"],
+	"include": ["cypress"],
 	"files": [],
 	"references": [{ "path": "./tsconfig.app.json" }, { "path": "./tsconfig.node.json" }]
 }
