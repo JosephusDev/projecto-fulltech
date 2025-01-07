@@ -274,7 +274,12 @@ export default function Projetos() {
 												<TableCell>
 													<DropdownMenu>
 														<DropdownMenuTrigger asChild>
-															<Button id={`moreButton${index}`} aria-haspopup='true' size='icon' variant='ghost'>
+															<Button
+																data-testid={`moreButton${index}`}
+																aria-haspopup='true'
+																size='icon'
+																variant='ghost'
+															>
 																<MoreHorizontal className='h-4 w-4' />
 																<span className='sr-only'>Toggle menu</span>
 															</Button>
@@ -296,7 +301,7 @@ export default function Projetos() {
 																)}
 															</DropdownMenuItem>
 															<DropdownMenuItem
-																id={`trashButton${index}`}
+																data-testid={`trashButton${index}`}
 																onClick={() => eliminar(projeto.id)}
 																className='gap-2'
 															>

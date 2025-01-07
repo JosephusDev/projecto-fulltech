@@ -29,10 +29,10 @@ describe('End2End', () => {
 		// fechar o modal
 		cy.get('#cancelButton').click()
 		// clicar no botão mais do projeto criado
-		cy.get('#moreButton2').click()
+		cy.get('[data-testid="moreButton2"]').click()
 		cy.wait(2000)
 		// clicar em eliminar
-		cy.get('#trashButton2').click()
+		cy.get('[data-testid="trashButton2"]').click()
 		cy.wait(2000)
 		cy.get('#logoutButton').click()
 	})
