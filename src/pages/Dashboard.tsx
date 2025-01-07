@@ -1,4 +1,4 @@
-import Header from '@/components/Header'
+import Header from '@/components/MyHeader'
 import LayoutBase from '@/components/LayoutBase'
 import { Card } from '@/components/ui/card'
 
