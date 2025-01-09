@@ -11,7 +11,7 @@ describe('End2End', () => {
 		cy.get('#email').focus().type('condepinto2@gmail.com')
 		cy.get('#loginButton').click()
 		// verifica se a tela de projetos é apresentada
-		cy.contains('Protos').should('exist')
+		cy.contains('Projetos').should('exist')
 		cy.wait(2000)
 		// Clica no adicionar
 		cy.get('#openModal').click()
