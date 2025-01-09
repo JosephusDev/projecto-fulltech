@@ -9,7 +9,8 @@
 		"build": "tsc -b && vite build",
 		"lint": "eslint .",
 		"preview": "vite preview",
-		"test": "jest"
+		"test": "jest",
+		"test:ci": "cypress run"
 	},
 	"dependencies": {
 		"@radix-ui/react-avatar": "^1.1.1",
