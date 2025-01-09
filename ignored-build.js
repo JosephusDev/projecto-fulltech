@@ -1,8 +1,9 @@
-const url = process.env.VERCEL_HOOK_URL // URL do deploy
-if (url && url.includes('source=hook')) {
-	console.log('Deploy triggered by hook. Allowing build ' + url)
-	process.exit(1)
+const triggerSource = process.env.VERCEL_TRIGGER_SOURCE
+
+if (triggerSource === 'hook') {
+	console.log('Deploy triggered by a hook. Allowing build: ' + triggerSource)
+	process.exit(1) // Retorna 1 para permitir o build.
 } else {
-	console.log('Deploy not triggered by hook. Ignoring build ' + url)
-	process.exit(0)
+	console.log('Deploy not triggered by a hook. Ignoring build: ' + triggerSource)
+	process.exit(0) // Retorna 0 para ignorar o build.
 }

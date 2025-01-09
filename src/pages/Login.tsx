@@ -18,7 +18,7 @@ export default function Login() {
 					<Card className='animate-fade-in'>
 						<CardHeader>
 							<CardTitle className='text-2xl flex items-center gap-2 text-primary'>FullTech Project</CardTitle>
-							<CardDescription>Gestão dos projectos da Startup Fulltech. Inicie sessão para continuar.</CardDescription>
+							<CardDescription>Gestão dos projectos da Startup Fulltech. Faça Login para continuar.</CardDescription>
 						</CardHeader>
 						<CardContent>
 							<div className='flex flex-col gap-6'>
