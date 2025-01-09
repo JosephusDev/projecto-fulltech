@@ -1,4 +1,4 @@
-const triggerSource = process.env.VERCEL_GIT_COMMIT_SHA || 'undefined'
+const triggerSource = process.env.VERCEL_URL || 'undefined'
 
 if (triggerSource) {
 	console.log('Deploy not triggered by a hook. Ignoring build: ' + triggerSource)
