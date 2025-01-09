@@ -1,5 +1,5 @@
 // ignored-build.js
-const commitMessage = process.env.VERCEL_GIT_COMMIT_MESSAGE || ''
+const commitMessage = process.env.VERCEL_GIT_COMMIT_MESSAGE
 
 if (commitMessage) {
 	console.log('✅ - Build permitida (commit do deploy hook): ' + commitMessage)
