@@ -1,10 +1,10 @@
 // ignored-build.js
-const commitAuthor = process.env.VERCEL_GIT_COMMIT_AUTHOR_NAME || ''
+const commitMessage = process.env.VERCEL_GIT_COMMIT_MESSAGE || ''
 
-if (commitAuthor) {
-	console.log('🚫 - Build ignorada (commit normal).')
-	process.exit(0) // Ignora o build
-} else {
-	console.log('✅ - Build permitida (commit do deploy hook).')
+if (commitMessage) {
+	console.log('✅ - Build permitida (commit do deploy hook): ' + commitMessage)
 	process.exit(1) // Permite o build
+} else {
+	console.log('🚫 - Build ignorada (commit normal): ' + commitMessage)
+	process.exit(0) // Ignora o build
 }
