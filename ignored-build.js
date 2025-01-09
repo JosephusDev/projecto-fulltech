@@ -1,4 +1,4 @@
-const triggerSource = process.env.VERCEL_TRIGGER_SOURCE
+const triggerSource = process.env.SOURCE || 'undefined'
 
 if (triggerSource === 'hook') {
 	console.log('Deploy triggered by a hook. Allowing build: ' + triggerSource)
