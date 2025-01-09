@@ -50,4 +50,4 @@ jobs:
         VERCEL_DEPLOY_HOOK: ${{ secrets.VERCEL_DEPLOY_HOOK }}
       run: |
         echo "Triggering Vercel deploy via Deploy Hook"
-        curl -X POST -d {} $VERCEL_DEPLOY_HOOK
+        curl -X POST -H "Content-Type: application/json" -d '{"source": "deploy_hook"}' $VERCEL_DEPLOY_HOOK

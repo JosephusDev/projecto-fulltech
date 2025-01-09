@@ -1,9 +1,21 @@
-const triggerSource = process.env.VERCEL_URL || 'undefined'
+const fs = require('fs')
+const path = require('path')
 
-if (triggerSource) {
-	console.log('Deploy not triggered by a hook. Ignoring build: ' + triggerSource)
-	process.exit(0) // Retorna 0 para ignorar o build.
+// Verifique se há payload vindo do Deploy Hook
+const payloadPath = path.join('/tmp', 'deploy-hook-payload.json')
+let deploySource = 'unknown'
+
+if (fs.existsSync(payloadPath)) {
+	const payload = JSON.parse(fs.readFileSync(payloadPath, 'utf8'))
+	deploySource = payload.source || 'unknown'
+}
+
+console.log('Deploy source:', deploySource)
+
+if (deploySource === 'deploy_hook') {
+	console.log('Deploy triggered by Deploy Hook. Allowing build.')
+	process.exit(1)
 } else {
-	console.log('Deploy triggered by a hook. Allowing build: ' + triggerSource)
-	process.exit(1) // Retorna 1 para permitir o build.
+	console.log('Deploy not triggered by Deploy Hook. Ignoring build.')
+	process.exit(0)
 }
