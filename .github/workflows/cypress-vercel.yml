@@ -45,9 +45,16 @@ jobs:
       with:
         node-version: 16
 
+    - name: Create deploy commit
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        git commit --allow-empty -m "[deploy-hook] Automatic deployment"
+        git push origin main
+
     - name: Trigger Vercel Deploy
       env:
         VERCEL_DEPLOY_HOOK: ${{ secrets.VERCEL_DEPLOY_HOOK }}
       run: |
         echo "Triggering Vercel deploy via Deploy Hook"
-        curl -X POST -H "Content-Type: application/json" -d '{"source": "deploy_hook"}' $VERCEL_DEPLOY_HOOK
+        curl -X POST -d {} $VERCEL_DEPLOY_HOOK

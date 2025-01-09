@@ -1,21 +1,10 @@
-import fs from 'fs'
-import path from 'path'
+// ignored-build.js
+const commitMessage = process.env.VERCEL_GIT_COMMIT_MESSAGE || ''
 
-// Verifique se há payload vindo do Deploy Hook
-const payloadPath = path.join('/tmp', 'deploy-hook-payload.json')
-let deploySource = 'unknown'
-
-if (fs.existsSync(payloadPath)) {
-	const payload = JSON.parse(fs.readFileSync(payloadPath, 'utf8'))
-	deploySource = payload.source || 'unknown'
-}
-
-console.log('Deploy source:', deploySource)
-
-if (deploySource === 'deploy_hook') {
-	console.log('Deploy triggered by Deploy Hook. Allowing build.')
-	process.exit(1)
+if (commitMessage.includes('[deploy-hook]')) {
+	console.log('✅ - Build permitida (commit do deploy hook)')
+	process.exit(1) // Permite o build
 } else {
-	console.log('Deploy not triggered by Deploy Hook. Ignoring build.')
-	process.exit(0)
+	console.log('🚫 - Build ignorada (commit normal)')
+	process.exit(0) // Ignora o build
 }
