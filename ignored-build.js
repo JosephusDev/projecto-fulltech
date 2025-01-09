@@ -1,5 +1,5 @@
-const fs = require('fs')
-const path = require('path')
+import fs from 'fs'
+import path from 'path'
 
 // Verifique se há payload vindo do Deploy Hook
 const payloadPath = path.join('/tmp', 'deploy-hook-payload.json')
