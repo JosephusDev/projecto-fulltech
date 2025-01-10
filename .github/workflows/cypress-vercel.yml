@@ -3,11 +3,10 @@ name: Cypress Tests and Vercel Deploy
 on:
   push:
     branches:
-      - producao # Testes no branch de revisão
-      - main    # Deploy apenas no main
+      - main
   pull_request:
     branches:
-      - producao
+      - main
 
 jobs:
   test:
@@ -34,7 +33,6 @@ jobs:
       run: npx cypress run
 
   deploy:
-    if: github.ref == 'refs/heads/main' # Apenas executa no main
     needs: test
     runs-on: ubuntu-latest
 
