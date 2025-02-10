@@ -20,7 +20,7 @@ export default function Login() {
 						<CardHeader>
 							<CardTitle className='text-2xl flex flex-col items-center gap-2'>
 								<div className='bg-primary p-2 rounded-full mb-2'>
-									<Lock />
+									<Lock color='#FFFFFF' />
 								</div>
 								Startup FullTech
 							</CardTitle>
