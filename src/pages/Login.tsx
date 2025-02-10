@@ -6,6 +6,7 @@ import { useAuth } from '@/context/AuthContext'
 import Lottie from 'lottie-react'
 import image from '@/assets/img/project.json'
 import { useState } from 'react'
+import { Lock } from 'lucide-react'
 
 export default function Login() {
 	const { login, loginWithEmail } = useAuth()
@@ -17,8 +18,13 @@ export default function Login() {
 				<div className='w-full max-w-sm'>
 					<Card className='animate-fade-in'>
 						<CardHeader>
-							<CardTitle className='text-2xl flex items-center gap-2'>FullTech Project</CardTitle>
-							<CardDescription>Gestão dos projectos da Startup Fulltech. Faça Login para continuar.</CardDescription>
+							<CardTitle className='text-2xl flex flex-col items-center gap-2'>
+								<div className='bg-primary p-2 rounded-full mb-2'>
+									<Lock />
+								</div>
+								Startup FullTech
+							</CardTitle>
+							<CardDescription className='text-center'>Faça Login para continuar.</CardDescription>
 						</CardHeader>
 						<CardContent>
 							<div className='flex flex-col gap-6'>
