@@ -30,9 +30,9 @@ export const createClient = async (data: Omit<ICliente, 'id'>) => {
 }
 
 export const updateClient = async ({ id, data }: { id: string; data: Omit<ICliente, 'id'> }) => {
-	await Api.put(`/clientes?id=${id}`, data)
+	await Api.put(`/clientes/${id}`, data)
 }
 
 export const deleteClient = async (id: string) => {
-	await Api.delete(`/clientes?id=${id}`)
+	await Api.delete(`/clientes/${id}`)
 }
