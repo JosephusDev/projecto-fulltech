@@ -205,8 +205,8 @@ export default function Clientes() {
 									<TableHead className='font-bold text-center'>Cliente</TableHead>
 									<TableHead className='font-bold text-center'>Telefone</TableHead>
 									<TableHead className='font-bold text-center'>Projeto</TableHead>
-									<TableHead className='font-bold text-center'>Total a pagar</TableHead>
-									<TableHead className='font-bold text-center'>Total pago</TableHead>
+									<TableHead className='whitespace-nowrap font-bold text-center'>Total a pagar</TableHead>
+									<TableHead className='whitespace-nowrap font-bold text-center'>Total pago</TableHead>
 									<TableHead className='font-bold text-center'>Status</TableHead>
 									<TableHead className='font-bold text-center'>Editar</TableHead>
 									<TableHead className='font-bold text-center'>Eliminar</TableHead>
