@@ -10,6 +10,7 @@ interface ICliente {
 	id: string
 	nome: string
 	telefone: string
+	valor_pago: number
 	projetoId?: string | null
 	projeto?: IProjeto
 }

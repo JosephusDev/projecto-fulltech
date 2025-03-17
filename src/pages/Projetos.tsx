@@ -202,7 +202,7 @@ export default function Projetos() {
 									<SelectContent>
 										<SelectGroup>
 											<SelectItem value='true'>Concluido</SelectItem>
-											<SelectItem value='false'>Em andamento</SelectItem>
+											<SelectItem value='false'>Não concluido</SelectItem>
 										</SelectGroup>
 									</SelectContent>
 								</Select>

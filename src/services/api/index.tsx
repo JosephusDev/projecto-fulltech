@@ -3,7 +3,7 @@ import axios from 'axios'
 const urlBase = 'https://projetos-fulltech-api.vercel.app'
 
 const Api = axios.create({
-  baseURL: urlBase,
+	baseURL: urlBase,
 })
 
 export { urlBase, Api }

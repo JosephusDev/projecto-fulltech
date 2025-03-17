@@ -21,6 +21,7 @@ export default function Clientes() {
 
 	const [nome, setNome] = useState('')
 	const [telefone, setTelefone] = useState('')
+	const [valorPago, setValorPago] = useState(0)
 	const [projeto, setProjeto] = useState('')
 	const [search, setSearch] = useState('')
 
@@ -71,6 +72,7 @@ export default function Clientes() {
 			await createClientFn({
 				nome,
 				telefone,
+				valor_pago: valorPago,
 				projetoId,
 			})
 				.then(() => {
@@ -94,6 +96,7 @@ export default function Clientes() {
 		const data = {
 			nome,
 			telefone,
+			valor_pago: valorPago,
 			projetoId,
 		}
 		await updateClientFn({ id, data })
@@ -118,6 +121,7 @@ export default function Clientes() {
 	const limparCampos = () => {
 		setNome('')
 		setTelefone('')
+		setValorPago(0)
 		setProjeto('')
 	}
 
@@ -139,23 +143,36 @@ export default function Clientes() {
 						onConfirm={cadastrar}
 						visibleModal={true}
 					>
-						<div className='grid gap-4 py-4'>
-							<div className='grid sm:grid-cols-4 items-center gap-x-2'>
-								<Label htmlFor='nome' className='text-right m-2'>
-									Nome
-								</Label>
-								<Input onChange={text => setNome(text.target.value)} id='nome' className='col-span-3' />
-							</div>
-							<div className='grid sm:grid-cols-4 items-center gap-x-7'>
-								<Label htmlFor='telefone' className='text-right m-2'>
-									Telefone
-								</Label>
-								<Input
-									onChange={text => setTelefone(text.target.value)}
-									type='tel'
-									id='telefone'
-									className='col-span-3'
-								/>
+						<div className='flex flex-col gap-4'>
+							<div className='flex gap-2'>
+								<div className='flex flex-col items-center gap-x-2'>
+									<Label htmlFor='nome' className='w-full m-2'>
+										Nome
+									</Label>
+									<Input onChange={text => setNome(text.target.value)} id='nome' className='col-span-3' />
+								</div>
+								<div className='flex flex-col items-center gap-x-7'>
+									<Label htmlFor='telefone' className='w-full m-2'>
+										Telefone
+									</Label>
+									<Input
+										onChange={text => setTelefone(text.target.value)}
+										type='tel'
+										id='telefone'
+										className='col-span-3'
+									/>
+								</div>
+								<div className='flex flex-col items-center gap-x-7'>
+									<Label htmlFor='valor_pago' className='w-full m-2'>
+										Valor pago
+									</Label>
+									<Input
+										onChange={e => setValorPago(Number(e.target.value))}
+										type='number'
+										id='valor_pago'
+										className='col-span-3'
+									/>
+								</div>
 							</div>
 							<ComboBox
 								title='Procure um projeto'
@@ -188,7 +205,8 @@ export default function Clientes() {
 									<TableHead className='font-bold text-center'>Cliente</TableHead>
 									<TableHead className='font-bold text-center'>Telefone</TableHead>
 									<TableHead className='font-bold text-center'>Projeto</TableHead>
-									<TableHead className='font-bold text-center'>Valor</TableHead>
+									<TableHead className='font-bold text-center'>Total a pagar</TableHead>
+									<TableHead className='font-bold text-center'>Total pago</TableHead>
 									<TableHead className='font-bold text-center'>Status</TableHead>
 									<TableHead className='font-bold text-center'>Editar</TableHead>
 									<TableHead className='font-bold text-center'>Eliminar</TableHead>
@@ -198,6 +216,9 @@ export default function Clientes() {
 								{isLoading || isCreating || isUpdating || isDeleting ? (
 									<>
 										<TableRow>
+											<TableCell>
+												<Skeleton className='h-4 w-full' />
+											</TableCell>
 											<TableCell>
 												<Skeleton className='h-4 w-full' />
 											</TableCell>
@@ -237,6 +258,9 @@ export default function Clientes() {
 												<TableCell className='whitespace-nowrap text-center'>
 													{cliente.projeto?.valor.toLocaleString() || 0} Kz
 												</TableCell>
+												<TableCell className='whitespace-nowrap text-center'>
+													{cliente.valor_pago?.toLocaleString() || 0} Kz
+												</TableCell>
 												<TableCell className='flex items-center justify-center mt-3'>
 													<Circle
 														size={14}
@@ -256,35 +280,49 @@ export default function Clientes() {
 																	setProjeto(cliente.projeto?.nome || '')
 																	setNome(cliente.nome)
 																	setTelefone(cliente.telefone)
+																	setValorPago(cliente.valor_pago)
 																}}
 															>
 																<Edit size={18} />
 															</Button>
 														}
 													>
-														<div className='grid gap-4 py-4'>
-															<div className='grid sm:grid-cols-4 items-center gap-x-2'>
-																<Label htmlFor='nome' className='text-right m-2'>
-																	Nome
-																</Label>
-																<Input
-																	value={nome}
-																	onChange={text => setNome(text.target.value)}
-																	id='nome'
-																	className='col-span-3'
-																/>
-															</div>
-															<div className='grid sm:grid-cols-4 items-center gap-x-7'>
-																<Label htmlFor='telefone' className='text-right m-2'>
-																	Telefone
-																</Label>
-																<Input
-																	value={telefone}
-																	onChange={text => setTelefone(text.target.value)}
-																	type='tel'
-																	id='telefone'
-																	className='col-span-3'
-																/>
+														<div className='flex flex-col gap-4'>
+															<div className='flex gap-2'>
+																<div className='flex flex-col items-center gap-x-2'>
+																	<Label htmlFor='nome' className='w-full m-2'>
+																		Nome
+																	</Label>
+																	<Input
+																		value={nome}
+																		onChange={text => setNome(text.target.value)}
+																		id='nome'
+																		className='col-span-3'
+																	/>
+																</div>
+																<div className='flex flex-col items-center gap-x-7'>
+																	<Label htmlFor='telefone' className='w-full m-2'>
+																		Telefone
+																	</Label>
+																	<Input
+																		value={telefone}
+																		onChange={text => setTelefone(text.target.value)}
+																		type='tel'
+																		id='telefone'
+																		className='col-span-3'
+																	/>
+																</div>
+																<div className='flex flex-col items-center gap-x-7'>
+																	<Label htmlFor='valor_pago' className='w-full m-2'>
+																		Valor pago
+																	</Label>
+																	<Input
+																		onChange={e => setValorPago(Number(e.target.value))}
+																		type='number'
+																		id='valor_pago'
+																		className='col-span-3'
+																	/>
+																</div>
 															</div>
 															<ComboBox
 																title='Procure um projeto'
