@@ -24,7 +24,7 @@ export default function Login() {
 								</div>
 								Startup FullTech
 							</CardTitle>
-							<CardDescription className='text-center'>Faça Login para continuar.</CardDescription>
+							<CardDescription className='text-center'>Faça Login para continuar</CardDescription>
 						</CardHeader>
 						<CardContent>
 							<div className='flex flex-col gap-6'>
