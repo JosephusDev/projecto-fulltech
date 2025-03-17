@@ -23,7 +23,7 @@ describe('End2End', () => {
 		cy.get('#preco').focus().type('200000')
 		cy.get('#tecnologias').focus().type('React, Node, Prisma')
 		cy.get('#status').click()
-		cy.contains('Em andamento').click()
+		cy.contains('Não concluido').click()
 		cy.get('#confirmButton').click()
 		cy.wait(2000)
 		// fechar o modal
