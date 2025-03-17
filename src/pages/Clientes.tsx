@@ -46,7 +46,8 @@ export default function Clientes() {
 	const { data: clientes, isLoading } = useQuery({
 		queryKey: ['clientes'],
 		queryFn: () => getClients(),
-		staleTime: 1000 * 60,
+		//staleTime: 1000 * 60,
+		refetchOnWindowFocus: true,
 	})
 
 	const { data: projetos } = useQuery({
@@ -317,6 +318,7 @@ export default function Clientes() {
 																		Valor pago
 																	</Label>
 																	<Input
+																		value={valorPago}
 																		onChange={e => setValorPago(Number(e.target.value))}
 																		type='number'
 																		id='valor_pago'

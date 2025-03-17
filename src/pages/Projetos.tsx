@@ -53,7 +53,8 @@ export default function Projetos() {
 	const { data, isLoading } = useQuery({
 		queryKey: ['projetos', currentPage, itemsPerPage],
 		queryFn: () => getProjects(currentPage, itemsPerPage),
-		staleTime: 1000 * 60, // 1 minuto até atualizar os dados
+		//staleTime: 1000 * 60, // 1 minuto até atualizar os dados
+		refetchOnWindowFocus: true,
 	})
 
 	const projetos = data?.projetos
@@ -164,7 +165,6 @@ export default function Projetos() {
 									Preço
 								</Label>
 								<Input
-									value={valor}
 									onChange={text => setValor(Number(text.target.value))}
 									type='number'
 									id='preco'
