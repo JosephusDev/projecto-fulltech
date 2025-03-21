@@ -26,13 +26,13 @@ export default function Projetos() {
 
 	const [nome, setNome] = useState('')
 	const [descricao, setDescricao] = useState('')
-	const [valor, setValor] = useState(0)
+	const [valor, setValor] = useState('')
 	const [tecnologias, setTecnologias] = useState('')
 	const [status, setStatus] = useState(true)
 	const [currentPage, setCurrentPage] = useState(1)
 	const [itemsPerPage, setItemsPerPage] = useState(5)
 
-	const alerta = (text: string, type: 'sucesso' | 'erro', variant: 'default' | 'destructive' = 'destructive') => {
+	const alerta = (text: string, type: 'sucesso' | 'erro', variant: 'default' | 'destructive' = 'default') => {
 		let Icone
 		if (type === 'sucesso') {
 			Icone = CheckCircle
@@ -82,7 +82,7 @@ export default function Projetos() {
 			await createProjectFn({
 				nome,
 				descricao,
-				valor,
+				valor: Number(valor),
 				tecnologias,
 				status,
 			})
@@ -125,7 +125,7 @@ export default function Projetos() {
 	const limparCampos = () => {
 		setNome('')
 		setDescricao('')
-		setValor(0)
+		setValor('')
 		setTecnologias('')
 		setStatus(true)
 	}
@@ -164,12 +164,7 @@ export default function Projetos() {
 								<Label htmlFor='preco' className='text-right'>
 									Preço
 								</Label>
-								<Input
-									onChange={text => setValor(Number(text.target.value))}
-									type='number'
-									id='preco'
-									className='col-span-3'
-								/>
+								<Input value={valor} onChange={text => setValor(text.target.value)} id='preco' className='col-span-3' />
 							</div>
 							<div className='grid grid-cols-4 items-center gap-4'>
 								<Label htmlFor='tecnologias' className='text-right'>
