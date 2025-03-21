@@ -93,7 +93,7 @@ export default function Projetos() {
 				})
 				.catch(error => {
 					if (error?.response?.status === 400) {
-						alerta(error?.response?.data?.errors?.[0].message, 'erro', 'destructive')
+						alerta(error?.response?.data?.error, 'erro', 'destructive')
 					}
 				})
 		} else {
